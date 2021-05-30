@@ -1,0 +1,276 @@
+<html>
+
+<head>
+	<title>zunderstream MULTISTREAM</title>
+
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+	<style type="text/css"
+	
+		>@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+		* {
+			margin: 0;
+			box-sizing: border-box
+		}
+
+		.clearfix:after {
+			content: ".";
+			display: block;
+			clear: both;
+			visibility: hidden;
+			line-height: 0;
+			height: 0
+		}
+
+		.floatleft {
+			float: left
+		}
+
+		.floatright {
+			float: right
+		}
+
+		body,
+		html {
+			height: 100%
+		}
+
+		body {
+			font-family: 'Bebas Neue', sans-serif;
+			background: #000;
+		}
+
+		.rounded {
+			border-radius: 3px
+		}
+
+		.squareright {
+			border-radius: 3px 0 0 3px
+		}
+
+		.squareleft {
+			border-radius: 0 3px 3px 0
+		}
+
+		.square {
+			border-radius: 0
+		}
+
+		.button,
+		button {
+			font-family: 'Bebas Neue', sans-serif;
+			background: rgba(0, 0, 0, .1);
+			color: #000;
+			border: 1px solid #000;
+			border-radius: 3px;
+			font-weight: 700;
+			font-size: 18px;
+			cursor: pointer
+		}
+
+		.button:hover,
+		button:hover {
+			background: rgba(0, 0, 0, .2)
+		}
+
+		.chat-container.inactive iframe,
+		.stream-container.inactive iframe,
+		.stream-container.inactive object {
+			opacity: 0
+		}
+
+		.stream-container,
+		.streamthumb {
+			background: #006dc2
+		}
+
+		.chat-container,
+		.chatthumb {
+			background: #000000
+		}
+
+		.stream-container.audio {
+			background: #107dd2
+		}
+
+		.chat-container,
+		.chatthumb,
+		.stream-container,
+		.streamthumb {
+			color: #eee
+		}
+
+		.chatthumb,
+		.streamthumb {
+			text-transform: uppercase;
+			font-weight: 700
+		}
+
+		.stream-container {
+			transition: top .5s, left .5s, height .5s, width .5s;
+			position: absolute;
+			display: none
+		}
+
+		.stream-container .video-js,
+		.stream-container .videowrapper,
+		.stream-container iframe,
+		.stream-container object,
+		.stream-container video {
+			height: 100%;
+			width: 100%;
+			border: none
+		}
+
+		.stream-container.dummy {
+			z-index: -1
+		}
+
+		.chat-container {
+			transition: top .5s, left .5s, height .5s, width .5s;
+			display: none;
+			z-index: 0;
+			position: absolute
+		}
+
+		.chat-container iframe {
+			height: 99%;
+			height: calc(100% - 35px);
+			width: 100%;
+			border: none
+		}
+
+		.chat-container .chatheader {
+			height: 35px;
+			width: 100%;
+			border: none;
+			text-align: center;
+			vertical-align: middle;
+			text-transform: uppercase;
+			font-size: 22pt;
+		}
+
+		
+
+		#mainpage {
+			width: 100%;
+			height: 100%;
+		}
+
+		#mainpage .stream-container[data-index="0"] {
+			display: block;
+			width: 50%;
+			height: 50%;
+			left: 0%;
+			top: 0%;
+		}
+
+		#mainpage .stream-container[data-index="1"] {
+			display: block;
+			width: 50%;
+			height: 50%;
+			left: 0%;
+			top: 50%;
+		}
+
+		#mainpage .chat-container[data-index="0"] {
+			display: block;
+			width: 25%;
+			height: 100%;
+			left: 50%;
+			top: 0%;
+		}
+
+		#mainpage .chat-container[data-index="1"] {
+			display: block;
+			width: 25%;
+			height: 100%;
+			left: 75%;
+			top: 0%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="mainpage" data-layout-index="3">
+		<div class="stream-container audio chat player-twitch" data-tag="zunderscore" data-index="0"
+			data-object-type="stream">
+			<div class="videowrapper" id="stream-zunderscore"><iframe
+					src="https://player.twitch.tv?channel=zunderscore&amp;parent=multistream.zunderscore.tv"
+					allowfullscreen="" scrolling="no" frameborder="0" allow="autoplay; fullscreen" title="Twitch"
+					sandbox="allow-modals allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"></iframe>
+			</div>
+		</div>
+
+		<div class="stream-container player-twitch" data-tag="costreamer" data-index="1" data-object-type="stream">
+			<div class="videowrapper" id="stream-costreamer"><iframe
+					id="costreamer-iframe"
+					allowfullscreen="" scrolling="no" frameborder="0" allow="autoplay; fullscreen" title="Twitch"
+					sandbox="allow-modals allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"></iframe>
+			</div>
+		</div>
+
+		<div class="chat-container current" data-tag="zunderscore" data-index="0" data-object-type="chat">
+			<div class="chatheader">zunderscore</div>
+			<iframe frameborder="0" scrolling="no" id="zunderscore"
+				src="https://www.twitch.tv/embed/zunderscore/chat?darkpopout&amp;parent=multistream.zunderscore.tv"></iframe>
+		</div>
+
+		<div class="chat-container current" data-tag="costreamer" data-index="1" data-object-type="chat">
+			<div class="chatheader" id="costreamer-title">Co-streamer</div>
+			<iframe frameborder="0" scrolling="no" id="costreamer-chat"></iframe>
+		</div>
+
+		<script type="text/javascript">
+		
+			if (window.location.search.substr(1) === undefined
+				|| window.location.search.substr(1) === null
+				|| window.location.search.substr(1) === "") {
+					window.location.replace("https://twitch.tv/zunderscore");
+				}
+			else {
+				const costreamer = window.location.search.substr(1);
+
+				const costreamerTitle = document.getElementById("costreamer-title");
+				costreamerTitle.innerText = costreamer;
+
+				const costreamerStreamFrame = document.getElementById("costreamer-iframe");
+				costreamerStreamFrame.src = "https://player.twitch.tv?channel=" + costreamer + "&parent=multistream.zunderscore.tv";
+
+				const costreamerChatFrame = document.getElementById("costreamer-chat");
+				costreamerChatFrame.src = "https://www.twitch.tv/embed/" + costreamer + "/chat?darkpopout&parent=multistream.zunderscore.tv"
+
+				player_objs['zunderscore'] = new Twitch.Player("stream-zunderscore", { channel: "zunderscore", parent: ["multistream.zunderscore.tv"] });
+				player_objs['zunderscore'].setVolume(0.75);
+				player_objs['zunderscore'].addEventListener(Twitch.Player.READY, function () {
+					player_objs['zunderscore'].play();
+				});
+				player_objs['zunderscore'].addEventListener(Twitch.Player.PLAYING, function () {
+					if (player_objs['zunderscore'].already_muted === undefined) {
+						player_objs['zunderscore'].already_muted = true;
+
+						player_objs['zunderscore'].setMuted(false);
+
+					}
+				});
+				
+				player_objs['costreamer'] = new Twitch.Player("stream-costreamer", { channel: otherStreamer, parent: ["multistream.zunderscore.tv"] });
+				player_objs['costreamer'].setVolume(0.75);
+				player_objs['costreamer'].addEventListener(Twitch.Player.READY, function () {
+					player_objs['costreamer'].play();
+				});
+				player_objs['costreamer'].addEventListener(Twitch.Player.PLAYING, function () {
+					if (player_objs['costreamer'].already_muted === undefined) {
+						player_objs['costreamer'].already_muted = true;
+
+						player_objs['costreamer'].setMuted(true);
+
+					}
+				});
+			}
+		
+		</script>
+	</div>
+</body>
+
+</html>
